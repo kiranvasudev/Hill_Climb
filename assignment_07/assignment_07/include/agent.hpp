@@ -30,6 +30,7 @@ class Agent {
         void run();
         void print_cities(vector<City>&);
         void save_cities_image(vector<City>& cities, int file_counter);
+        double calculateDistance(double lat1, double lon1, double lat2, double lon2);
 };
 
 #endif // Agent_H_
