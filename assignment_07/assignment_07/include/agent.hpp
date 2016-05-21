@@ -18,6 +18,8 @@ using namespace std;
 class Agent {
     private:
         vector<City> cities;
+        double shortestDistance;
+        vector<City> shortestRoute;
         
         vector<City> hillClimb(vector<City> cities);
         void random_restart_hill_climb();

@@ -13,9 +13,10 @@
 #include <agent.hpp>
 #include <matplotlibcpp.h>
 #include <math.h>
+#include <sstream>
 
 Agent::Agent(vector<City> cities) :
-		cities(cities) {
+		cities(cities), shortestDistance(0), shortestRoute() {
 
 }
 
@@ -39,8 +40,14 @@ void Agent::print_cities(vector<City>& cities) {
 		y.push_back(cities[i].get_y());
 	}
 
+	// Convert the shortestDistance into a string to print it as title of the graph.
+	std::ostringstream strs;
+	strs << shortestDistance;
+	std::string distance = strs.str();
+
 	// Plot line from given x and y data.
 	matplotlibcpp::plot(x, y);
+	matplotlibcpp::title(distance + "km");
 	matplotlibcpp::show();
 }
 
@@ -69,6 +76,11 @@ vector<City> Agent::hillClimb(vector<City> cities) {
 	double totalDistance = 0;
 
 	while (cities.size() != 1) {
+
+		if (shortestDistance != 0 && totalDistance > shortestDistance) {
+			return shortestRoute;
+		}
+
 		min = calculateDistance(cities[0].get_x(), cities[0].get_y(),
 				cities[1].get_x(), cities[1].get_y());
 		minIndex = 1;
@@ -95,15 +107,20 @@ vector<City> Agent::hillClimb(vector<City> cities) {
 	cities.erase(cities.begin());
 	totalDistance += lastDistance;
 
-	cout << journeyPath.size() << endl;
-	cout << "total distance " << totalDistance << endl;
+	double distanceBackToInitial = abs(
+			(journeyPath.back().get_x() - journeyPath[0].get_x())
+					+ (journeyPath.back().get_y() - journeyPath[0].get_y()));
+	journeyPath.push_back(journeyPath[0]);
+	totalDistance += distanceBackToInitial;
 
-//	for (std::vector<City>::iterator it = journeyPath.begin();
-//						it != journeyPath.end(); ++it) {
-//			cout << (*it).get_name() << endl;
-//		}
+	if (shortestDistance != 0 && totalDistance > shortestDistance) {
+		return shortestRoute;
+	} else {
+		shortestRoute = journeyPath;
+		shortestDistance = totalDistance;
+	}
 
-	return journeyPath;
+	return shortestRoute;
 }
 
 double Agent::calculateDistance(double lon1, double lat1, double lon2,
@@ -126,19 +143,21 @@ void Agent::random_restart_hill_climb() {
 	//		std::srand ( unsigned ( std::time(0) ) );
 
 	int counter = 0;
-	while (counter != 20) {
+	vector<City> journeyPath;
+	while (counter != 2000) {
 		random_shuffle(cities.begin(), cities.end());
 
-		vector<City> journeyPath = hillClimb(cities);
+		journeyPath = hillClimb(cities);
 
-		for (std::vector<City>::iterator it = journeyPath.begin();
-				it != journeyPath.end(); ++it) {
-			cout << (*it).get_name() << endl;
-		}
-		cout << cities.size() << endl;
-		cout << "-------------------------------------------" << endl;
-
-		print_cities(journeyPath);
 		counter += 1;
 	}
+
+	for (std::vector<City>::iterator it = journeyPath.begin();
+			it != journeyPath.end(); ++it) {
+		cout << (*it).get_name() << endl;
+	}
+	cout << journeyPath.size() << endl;
+	cout << "total distance " << shortestDistance << endl;
+	cout << "-------------------------------------------" << endl;
+	print_cities(journeyPath);
 }
