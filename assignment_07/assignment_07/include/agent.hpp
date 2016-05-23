@@ -1,5 +1,5 @@
 /*
- * Daniel Vázquez
+ * Daniel Vázquez, Kiran Vasudev, Patrick Nagel
  * Aritificial Intelligence for Robotics
  * SS 2016
  * Assignment 7
