@@ -26,12 +26,12 @@
 \subsection{When do we try to find the global minimum?}
 
 \subsection{When do we try to find the global maximum?}
-We find the global maximum when we need to find the best possible output for the given input.
+We find the global maximum when the elevation(value of the heuristic function) corresponds to an objective function. An objective function is one that assigns a value to a solution or a partial solution.
 
 \subsection{What is the characteristic of a complete local search algorithm?}
 
 \subsection{What is the characteristic of an optimal algorithm?}
-The characteristic of an optimal algorithm is that it finds the best possible outcome from all possible outcomes in a state space.
+The characteristic of an optimal algorithm is that it finds the best possible outcome(\textbf{global maximum/minimum}) from all possible outcomes in a state space.
 
 \subsection{What is a landscape?}
 \subsection{What is Hill Climbing?}
@@ -48,4 +48,7 @@ The main condition that makes this algorithm find the optimal solution is that S
 
 \newpage
 \section{Discussion and comments on the Travelling Salesman Problem}
+The Travelling Salesman Problem is a problem where every city must be visited exactly once. Our aim is to find the shortest path to visit every single city. The Travelling Salesman Problem is an NP-Hard problem. \\
+
+In our approach we are looking for closest city to the current city. Tests showed that even after 200 iteration the differences between the total distances are not that big. Each iteration starts with a different random city. This way we can avoid getting stuck in a local minimum.
 \end{document}
