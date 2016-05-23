@@ -144,7 +144,7 @@ void Agent::random_restart_hill_climb() {
 
 	int counter = 0;
 	vector<City> journeyPath;
-	while (counter != 2000) {
+	while (counter != 200) {
 		random_shuffle(cities.begin(), cities.end());
 
 		journeyPath = hillClimb(cities);
