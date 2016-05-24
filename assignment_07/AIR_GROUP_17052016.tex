@@ -16,7 +16,7 @@
 \newpage
 \section{Answer questions}
 \subsection{What are local search algorithms?}
-
+Local search algorithms are used for solving computationally hard optimization problems. For these algorithms the path cost does not matter. Important is only the solution state.
 \subsection{What are the advantages of local search?}
 \begin{itemize}
 \item {These search algorithms use very little memory.}
@@ -24,24 +24,32 @@
 \end{itemize}
 
 \subsection{When do we try to find the global minimum?}
+The global minimum is important if the elevation corresponds to cost. In that case we try to find the global minimum. 
 
 \subsection{When do we try to find the global maximum?}
 We find the global maximum when the elevation(value of the heuristic function) corresponds to an objective function. An objective function is one that assigns a value to a solution or a partial solution.
 
 \subsection{What is the characteristic of a complete local search algorithm?}
+The characteristic of a complete local search algorithm is that it always finds a goal if one exists.
 
 \subsection{What is the characteristic of an optimal algorithm?}
 The characteristic of an optimal algorithm is that it finds the best possible outcome(\textbf{global maximum/minimum}) from all possible outcomes in a state space.
 
 \subsection{What is a landscape?}
+In the context of local search algorithms is a landscape a model, which represents the states and contains its location and elevation. Furthermore it shows the global maximum, global minimum and the local maxima and minima. 
+
 \subsection{What is Hill Climbing?}
 Hill Climbing is an algorithm that works by moving continuously in the direction of increasing value of traversing from one node in the state space to another(uphill). This algorithm terminates when there is no other neighbour that has a higher value than the current neighbour, ie. when it reaches its peak.
 
 \subsection{What is the problem of Hill Climbing?}
+Another expression for Hill climbing is greedy local search. The algorithm is called like this, because it takes a good neighbor state withouht thinking ahead. The next state might be misarable, but the algorithm does not consider this. Furthermore hill climbing often gets stuck because of running into local maxima, ridges or plateaux. In this situations the algorithms reaches a point where no progress is being made 
+
 \subsection{What drives the success of Hill Climbing?}
 The success of Hill Climbing algorithm depends mainly on the point/node at which the algorithm starts.
 
 \subsection{What is Simulated Annealing?}
+Simulated Anneealing is an algorithm that combines hill climbing with a random walk in some way that yields both efficiency and completeness. Different than hill climbing the simulated annealing algorithm picks a random move.
+
 \subsection{What is the condition that enables Simulated Annealing to find
 the optimal solution?}
 The main condition that makes this algorithm find the optimal solution is that Simulated Annealing takes a random move and checks if this random move improves the current situation. If it improves the current situation, then the random move is accepted. In Hill Climbing, the algorithm picks the best value, whereas in Simulated Annealing, the algorithm finds a random value which is better than the current value. 
